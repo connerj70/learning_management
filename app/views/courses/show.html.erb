@@ -1,0 +1,26 @@
+<div class="mx-auto w-full flex flex-col lg:flex-row pb-6">
+  <div class="mx-auto w-full">
+    <% if notice.present? %>
+      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+    <% end %>
+
+    <% if @course.lessons.any? && @course.lessons.first.video.present? %>
+      <%= video_tag @course.lessons.first.video, controls: true, class: "w-full rounded mb-6" %>
+    <% end %>
+
+    <div class="border p-6 rounded">
+      <div class="flex justify-start items-center flex-wrap w-full mb-2">
+        <% @course.categories.each do |category| %>
+          <div class="bg-amaranth-100 text-amaranth-800 text-sm font-semibold mt-2 mr-2 px-2.5 py-0.5 rounded"><%= category.name %></div>
+        <% end %>
+      </div>
+      <span><%= @course.lessons.count %> <%= "lesson".pluralize(@course.lessons.count) %> </span>
+      <h1 class="text-2xl font-bold"><%= @course.title %></h1>
+      <p class="text-gray-500 mt-2"><%= @course.description %></p>
+    </div>
+  </div>
+
+  <div>
+    <%= render "sidebar" %>
+  </div>
+</div>

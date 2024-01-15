@@ -1,0 +1,21 @@
+<div id="<%= dom_id course %>" class="max-w-sm rounded-b overflow-hidden shadow-lg hover:bg-voodoo-100">
+  <%= link_to course, class: "flex flex-col h-full" do %>
+    <% if course.image.present? %>
+      <%= image_tag course.image, class: "w-full rounded-t" %>
+    <% else %>
+      <%= image_tag("https://via.placeholder.com/300") %> 
+    <% end %>
+
+    <div class="px-6 py-4 flex flex-col justify-between grow">
+      <div>
+        <div class="flex items-center justify-between font-bold text-xl mb-2">
+          <%= course.title %>
+        </div>
+        <p class="text-sm font-extralight">Conner Jensen<p>
+        <div>
+          <p class="text-md font-light">Free</p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

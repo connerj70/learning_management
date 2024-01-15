@@ -1,0 +1,46 @@
+<div class="flex flex-col lg:pl-6">
+  <div class="mt-6 lg:mt-0 flex justify-center items-center w-full">
+    <div class="bg-white rounded-lg shadow-lg overflow-hidden w-full">
+      <div class="bg-amaranth-500 p-4">
+        <h2 class="text-white-50 text-2xl font-bold">Start Learning</h2>
+      </div>
+      <div class="p-4">
+        <% if user_signed_in? %>
+          <p class="text-gray-700 text-base mb-4">
+          Start the course and begin learning all about the world of web dev.
+          </p>
+          <%= link_to "Start Course", course_lesson_path(@course, @course.first_lesson), class: "bg-revolver-600 hover:bg-revolver-700 text-white-50 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full transition ease-in-out duration-150" %>
+        <% else %>
+          <p class="text-gray-700 text-base mb-4">
+          Sign up for free today and start exploring the endless possibilities.
+          </p>
+          <%= link_to "Sign Up", new_user_registration_path, class: "bg-revolver-600 hover:bg-revolver-700 text-white-50 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full transition ease-in-out duration-150" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% if @course.paid %>
+    <div class="mt-6 flex justify-center items-center w-full">
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden w-full">
+        <div class="bg-amaranth-500 p-4">
+          <h2 class="text-white-50 text-2xl font-bold">Get more content</h2>
+        </div>
+        <div class="p-4">
+          <% if user_signed_in? %>
+            <p class="text-gray-700 text-base mb-4">
+            Unlock more content by purchasing the full course.
+            </p>
+            <button class="bg-revolver-600 hover:bg-revolver-700 text-white-50 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full transition ease-in-out duration-150">Unlock Full Course</button>
+          <% else %>
+            <p class="text-gray-700 text-base mb-4">
+            Sign up for free today and start exploring the endless possibilities.
+            </p>
+            <%= link_to "Sign Up", new_user_registration_path, class: "bg-revolver-600 hover:bg-revolver-700 text-white-50 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full transition ease-in-out duration-150" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+</div>
+</div>
