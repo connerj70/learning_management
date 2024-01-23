@@ -1,0 +1,17 @@
+<%= form_with(model: admin_user) do |form| %>
+  <% if admin_user.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(admin_user.errors.count, "error") %> prohibited this admin_user from being saved:</h2>
+
+      <ul>
+        <% admin_user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

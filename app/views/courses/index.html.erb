@@ -4,6 +4,6 @@
   <% end %>
 
   <div id="courses" class="min-w-full flex flex-wrap justify-center gap-14 pb-6">
-    <%= render @courses %>
+    <%= render @courses, { user_started_courses: @user_started_courses, user_course_progresses: @user_course_progresses, user_unlocked_courses: @user_unlocked_courses } %>
   </div>
 </div>

@@ -12,7 +12,10 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <div class="w-full">
+      <%= render "shared/navbar" %>
+    </div>
+    <main class="container mx-auto mt-6 px-5 flex">
       <%= yield %>
     </main>
   </body>

@@ -1,0 +1,48 @@
+<%= form_with(model: [:admin, admin_course]) do |form| %>
+  <% if admin_course.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(admin_course.errors.count, "error") %> prohibited this admin_course from being saved:</h2>
+
+      <ul>
+        <% admin_course.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="flex flex-col">
+    <label class="text-sm" for="name">Title</label>
+    <%= form.text_field :title, class: "rounded border-gray-200", id: "title", placeholder: "Course title" %>
+  </div>
+
+  <div class="flex flex-col mt-4"> 
+    <label class="text-sm" for="name">Description</label>
+    <%= form.rich_text_area :description, class: "rounded border-gray-200", id: "description", placeholder: "Course description" %>
+  </div>
+
+  <div class="flex flex-col mt-4">
+    <label class="text-sm" for="name">Stripe Price ID</label>
+    <%= form.text_field :stripe_price_id, class: "rounded border-gray-200", id: "title" %>
+  </div>
+
+  <div class="flex flex-col mt-4">
+    <%= admin_course.image.present? ? (image_tag admin_course.image, class: "w-64 rounded mb-2") : nil %>
+    <label class="text-sm" for="cover_image">Cover Image</label>
+    <%= form.file_field :image, id: "image" %>
+  </div>
+
+  <div class="flex flex-col mt-4">
+    <label class="text-sm" for="cover_image">Paid</label>
+    <%= form.check_box :paid, id: "paid", class: "rounded border-gray-200" %>
+  </div>
+
+  <div class="flex flex-col mt-4">
+    <label class="text-sm" for="cover_image">Premium Description</label>
+    <%= form.rich_text_area :premium_description, class: "rounded border-gray-200", id: "premium_description", placeholder: "Premium course description" %>
+  </div>
+
+  <div class="mt-4">
+    <%= form.submit "Submit", class: "bg-amaranth-500 hover:bg-amaranth-600 text-white-50 rounded cursor-pointer px-4 py-2" %>
+  </div>
+<% end %>

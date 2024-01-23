@@ -1,0 +1,40 @@
+<%= form_with(model: [:admin, @admin_course, admin_lesson]) do |form| %>
+  <% if admin_lesson.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(admin_lesson.errors.count, "error") %> prohibited this admin_lesson from being saved:</h2>
+
+      <ul>
+        <% admin_lesson.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="flex flex-col">
+    <label class="text-sm" for="title">Title</label>
+    <%= form.text_field :title, class: "rounded", id: "title", placeholder: "Lesson title" %>
+  </div>
+
+  <div class="flex flex-col mt-4">
+    <label class="text-sm" for="description">Description</label>
+    <%= form.rich_text_area :description, class: "rounded", id: "description", placeholder: "Lesson description" %>
+  </div>
+
+  <div class="flex flex-col mt-4">
+    <label class="text-sm" for="paid">Paid</label>
+    <%= form.check_box :paid, class: "rounded", id: "paid" %>
+  </div>
+
+  <div class="rounded mt-4">
+    <div class="flex flex-col">
+      <%= admin_lesson.video.present? ? (video_tag admin_lesson.video, class: "w-64 rounded") : nil %>
+      <label class="text-sm" for="video">Video</label>
+      <%= form.file_field :video, id: "video" %>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <%= form.submit "Submit", class: "bg-amaranth-500 hover:bg-amaranth-600 text-white-50 rounded cursor-pointer px-4 py-2" %>
+  </div>
+<% end %>

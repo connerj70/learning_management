@@ -1,0 +1,10 @@
+<div class="w-full flex flex-col justify-start items-center" >
+  <%= render "form", admin_course: @admin_course %>
+
+  <br>
+
+  <div>
+    <%= link_to "Show this course", [:admin, @admin_course] %> |
+    <%= link_to "Back to courses", admin_courses_path %>
+  </div>
+</div>

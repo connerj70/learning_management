@@ -1,0 +1,18 @@
+<div id="<%= dom_id lesson %>" class="max-w-sm min-w-64 rounded-b overflow-hidden shadow-lg hover:bg-amaranth-100">
+  <%= link_to [:admin, @admin_course, lesson] do %>
+    <% if lesson.video.present? %>
+      <%= image_tag lesson.video.preview(:thumb), class: "w-full rounded-t" %>
+    <% else %>
+      <%= image_tag("https://via.placeholder.com/320") %>
+    <% end %>
+
+    <div class="px-6 py-4">
+      <div class="font-bold text-xl mb-2">
+        <% if lesson.paid %>
+          <%= icon('fa-solid', 'lock', class: "mr-2 text-gray-600") %>
+        <% end %>
+        <%= lesson.title %> 
+      </div>
+    </div>
+  <% end %>
+</div>

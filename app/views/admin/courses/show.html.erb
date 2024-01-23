@@ -1,0 +1,10 @@
+<div class="flex flex-col w-full items-center justify-start">
+  <p style="color: green"><%= notice %></p>
+
+  <%= render @admin_course %>
+
+  <div class="mt-4 flex gap-4">
+    <%= link_to "Back to courses", admin_courses_path %>
+    <%= button_to "Destroy this course", [:admin, @admin_course], method: :delete, data: {'turbo-confirm': "Are you sure?" } %>
+  </div>
+</div>

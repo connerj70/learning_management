@@ -3,19 +3,33 @@
     <% if course.image.present? %>
       <%= image_tag course.image, class: "w-full rounded-t" %>
     <% else %>
-      <%= image_tag("https://via.placeholder.com/300") %> 
+      <%= image_tag("https://via.placeholder.com/380x220") %> 
     <% end %>
 
     <div class="px-6 py-4 flex flex-col justify-between grow">
       <div>
         <div class="flex items-center justify-between font-bold text-xl mb-2">
           <%= course.title %>
+          <% if user_unlocked_courses&.include? course.id %>
+            <span class="ml-2 text-white-50 text-xs px-2 py-1 rounded bg-green-500">Unlocked</span>
+          <% end %>
         </div>
         <p class="text-sm font-extralight">Conner Jensen<p>
         <div>
-          <p class="text-md font-light">Free</p>
+          <p class="text-md font-light"><%= course.paid ? "Premium Content" : "Free" %></p>
         </div>
       </div>
+      <% if user_started_courses&.include? course.id %>
+        <% user_completed_percentage = user_course_progresses.find{|cp| cp[:course_id] == course.id}[:completed_percentage] %>
+        <div class="mt-2 h-4 relative rounded-full overflow-hidden">
+          <div class="w-full h-full bg-gray-200 absolute"></div>
+          <% if user_completed_percentage == 100 %>
+            <div class="h-full bg-green-500 absolute text-white-50 text-center text-xs" style="width:100%">Completed</div>
+          <% else %>
+            <div class="h-full bg-green-500 absolute text-white-50 text-center text-xs" style="width:<%= user_completed_percentage %>%"><%= user_completed_percentage%>%</div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   <% end %>
 </div>

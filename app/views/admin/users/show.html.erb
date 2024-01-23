@@ -1,0 +1,37 @@
+<div class="flex flex-col justify-start items-center w-full">
+  <p style="color: green"><%= notice %></p>
+
+  <div class="my-4">
+    <%= render @admin_user %>
+  </div>
+
+  <div class="flex gap-2 mb-6">
+    <%= link_to "Back to users", admin_users_path, class: "bg-camelot-500 rounded px-2 py-1 text-white-50" %>
+    <%= button_to "Destroy this user", [:admin, @admin_user], method: :delete, data: {'turbo-confirm': "Are you sure?"}, class: "bg-red-500 rounded px-2 py-1 text-white-50" %>
+  </div>
+
+  <div>
+    <h2 class="mb-2 font-semibold text-lg">User Started Courses</h2>
+    <table class="min-w-full bg-amaranth-50" style="border-collapse: separate; border-spacing: 0;">
+      <thead>
+        <tr class="text-amaranth-800">
+          <th class="px-6 py-3 border-b-2 border-amaranth-200 text-start bg-amaranth-100">Course Title</th>
+          <th class="px-6 py-3 border-b-2 border-amaranth-200 text-start bg-amaranth-100">Completed Percentage</th>
+          <th class="px-6 py-3 border-b-2 border-amaranth-200 text-start bg-amaranth-100">Paid</th>
+        </tr>
+      </thead>
+      <tbody class="text-gray-800">
+        <% @admin_courses.each do |course| %>
+          <% user_completed_percentage = @user_course_progresses.find {|cp| cp[:course_id] == course.id}[:completed_percentage] %>
+          <% user_paid = @admin_user.course_users.any?{|cu| cu.course_id == course.id } %>
+          <tr>
+            <td class="px-6 py-4 border-b border-gray-200"><%= course.title %></td>
+            <td class="px-6 py-4 border-b border-gray-200"><%= user_completed_percentage %></td>
+            <td class="px-6 py-4 border-b border-gray-200"><%= user_paid ? (icon('fa-solid', 'money-bill', class: "text-green-500")) : icon('fa-regular', 'circle-xmark', class: "text-red-500") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+</div>

@@ -1,0 +1,19 @@
+<div class="flex flex-col w-full">
+
+  <div class="mb-10"> 
+    <p style="color: green"><%= notice %></p>
+    <h1 class="mb-4 font-bold text-2xl"><%= @admin_course.title %> Lessons</h1>
+    <%= link_to "New Lesson", new_admin_course_lesson_path(@admin_course), class: "bg-amaranth-500 hover:bg-amaranth-600 text-white-50 rounded px-4 py-2" %>
+  </div>
+
+  <div data-controller="lesson" data-lesson-course-value="<%= @admin_course.id %>" data-sortable-animation-value="150" id="admin_lessons" class="flex flex-col flex-wrap justify-center lg:justify-start items-center lg:flex-row w-full gap-5 pb-4">
+    <% @admin_lessons.each do |admin_lesson| %>
+      <div class="max-w-xs" id="<%= admin_lesson.id %>">
+      <%= link_to [:admin, @admin_course, admin_lesson] do %>
+        <%= render admin_lesson %>
+      <% end %>
+      </div>
+    <% end %>
+  </div>
+
+</div>
