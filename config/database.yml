@@ -22,6 +22,9 @@ default: &default
 development:
   <<: *default
   database: learning_management_development
+  username: postgres
+  password: password
+  host: 127.0.0.1
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.

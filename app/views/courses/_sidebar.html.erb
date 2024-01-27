@@ -37,17 +37,33 @@
     <div class="mt-6 flex justify-center items-center w-full">
       <div class="bg-white rounded-lg shadow-lg overflow-hidden w-full">
         <div class="bg-amaranth-500 p-4">
-          <h2 class="text-white-50 text-2xl font-bold">Get more content</h2>
+          <% if @user_unlocked_course %>
+            <h2 class="text-white-50 text-2xl font-bold">You have premium access</h2>
+          <% else %>
+            <h2 class="text-white-50 text-2xl font-bold">Get more content</h2>
+          <% end %>
         </div>
         <div class="p-4">
           <% if user_signed_in? %>
-            <p class="text-gray-700 text-base mb-4">
-            Unlock more content by purchasing the full course.
-            </p>
-            <%= form_tag checkouts_path(@course), method: :post, class: "mt-4" do %>
-              <%= hidden_field_tag :course_id, @course.id %>
-              <%= hidden_field_tag :stripeEmail, current_user.email %>
-              <%= button_tag "Unlock Full Course", class: "bg-revolver-600 hover:bg-revolver-700 text-white-50 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full transition ease-in-out duration-150" %>
+            <% if @user_unlocked_course %>
+              <p class="text-gray-700 text-base mb-4">
+              You have unlocked this course. Enjoy!
+              </p>
+              <% if @course.premium_description.present? %>
+                <%= @course.premium_description %>
+              <% end %>
+            <% else %>
+              <p class="text-gray-700 text-base mb-4">
+              Unlock more content by purchasing the full course.
+              </p>
+              <% if @course.premium_description.present? %>
+                <%= @course.premium_description %>
+              <% end %>
+              <%= form_tag checkouts_path(@course), method: :post, class: "mt-4" do %>
+                <%= hidden_field_tag :course_id, @course.id %>
+                <%= hidden_field_tag :stripeEmail, current_user.email %>
+                <%= button_tag "Unlock Full Course", class: "bg-revolver-600 hover:bg-revolver-700 text-white-50 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full transition ease-in-out duration-150" %>
+              <% end %>
             <% end %>
           <% else %>
             <p class="text-gray-700 text-base mb-4">
